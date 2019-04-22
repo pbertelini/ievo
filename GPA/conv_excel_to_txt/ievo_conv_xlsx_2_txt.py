@@ -35,6 +35,7 @@ def fmt_coluna(col, i):
 
     return c
 
+
 if __name__ == "__main__":
 
     inicio()

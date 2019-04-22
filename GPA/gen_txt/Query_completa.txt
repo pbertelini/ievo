@@ -1,0 +1,222 @@
+DECLARE @result VARCHAR(50)
+DECLARE @count_tabela_ja_cortada int
+
+SELECT top 1 @result = autorizado from ievo_gpa_prod.dbo.Autorizacao where tipo_autorizacao = 'Kanban_Dif_Preto'
+
+select @count_tabela_ja_cortada = count(*)  from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+where is_cortado_nivel_cluster = 1 or is_cortado_nivel_camada = 1 or is_cortado_nivel_plu = 1
+
+if @result = 0 and @count_tabela_ja_cortada = 0
+Begin
+
+--exec proc_monta_tabela_cortes -- used in authorization node
+
+IF object_id('tempdb.dbo.#plus_table_temp') is not null
+    drop table #plus_table_temp
+
+DECLARE @corte_maximo int -- Ordem do R_1, R_2....Rn
+DECLARE @count_corte_maximo int = 0 -- contador do loop 1
+DECLARE @target_corte numeric(27, 13)  -- qtd disponivel na loja
+DECLARE @soma_qtd_plts_pedido numeric(27, 13)  -- qtd disponivel na loja
+DECLARE @soma_qtd_pltsTEMP numeric(27, 13)  -- qtd disponivel na loja
+
+
+
+select @soma_qtd_plts_pedido = SUM(qtd_plts) from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+select TOP 1 @target_corte = (capacidade_loja - qtd_indisponivel) - @soma_qtd_plts_pedido from ievo_gpa_prod.dbo.KanbanTemp order by pk_kanban desc
+select @corte_maximo = MAX(ordem_cluster) from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+
+--caso for um numero negativo, significa que o pedido é maior do que o espaço disponivel, então precisa realizar os cortes
+IF @target_corte < 0
+BEGIN
+
+SET @target_corte = @target_corte * (-1);
+
+--1º LOOP (Cluster) - corta o cluster total caso for menor do que o target e parar o loop caso o cluster ultrapassar e sendo necessário cortar item a item
+WHILE @count_corte_maximo <= @corte_maximo
+BEGIN
+	select @soma_qtd_pltsTEMP = sum(qtd_plts) from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois where  ordem_cluster = @count_corte_maximo
+	
+	IF @soma_qtd_pltsTEMP <= @target_corte 
+		BEGIN -- IF LOOP 1
+			-- corta todo cluster
+			update ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+			set qtd_plts = 0, is_cortado_nivel_cluster = 1
+			where  ordem_cluster = @count_corte_maximo;
+
+			SET @target_corte = @target_corte - @soma_qtd_pltsTEMP;
+			SET @count_corte_maximo = @count_corte_maximo + 1;
+		END -- END IF LOOP 1
+	ELSE IF @soma_qtd_pltsTEMP is null
+	BEGIN 
+		SET @count_corte_maximo = @count_corte_maximo + 1;
+	END
+	ELSE
+		BEGIN 
+			-- entra no loop 2...acredito que dando um break aqui e criando outro loop
+			BREAK;
+		END
+END;
+	print 'target atualizado'
+	print @target_corte
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+
+--2º LOOP ( Camada )
+DECLARE @count_camada int = 1;
+WHILE @count_camada <= 12
+BEGIN
+	print 'segunda camada'
+	print 'while'
+	print @count_camada
+		--colocar um print
+	DECLARE @soma_qtd_camada numeric(27, 13)
+	DECLARE @command nvarchar(1000) = 'select @result = sum(c' + TRIM(STR(@count_camada))  + ') from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois where  ordem_cluster = ' + TRIM(STR(@count_corte_maximo))
+		print @command
+	EXECUTE sp_executesql @command, N'@result numeric(27, 13) OUTPUT', @result=@soma_qtd_camada OUTPUT
+		--colocar um print
+	IF @soma_qtd_camada <= @target_corte
+		BEGIN -- IF LOOP 2
+			PRINT 'IF 2º CAMADA'
+			PRINT @soma_qtd_camada
+			PRINT @target_corte
+			-- corta toda camada
+			--aqui reduz a qtd de pallet pela camada atual
+			EXEC('update ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+			set qtd_plts = qtd_plts - c' +  @count_camada + ' , is_cortado_nivel_camada = 1,  c' +  @count_camada + ' = 0 ' +
+			'where  ordem_cluster = ' + @count_corte_maximo);
+
+			SET @target_corte = @target_corte - @soma_qtd_camada;
+			SET @count_camada = @count_camada + 1;
+		END -- END IF LOOP 2
+	ELSE
+		BEGIN 
+			PRINT 'ELSE 2º CAMADA'
+			PRINT @soma_qtd_camada
+			PRINT @target_corte
+			-- entra no loop 3...
+			BREAK;
+		END
+END;
+
+
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+Declare @soma_plts_temp_mf numeric(16,8);
+
+--3º Camada (Cod_Plu)
+CREATE table #plus_table_temp (cod_plu float, val_camada numeric(27, 13), ranking_oferta numeric(27, 13), ranking_vda numeric(27, 13))
+
+DECLARE @cod_plu_temp float;
+DECLARE @val_camada_temp  numeric(27, 13);
+DECLARE @val_plts_depois_reducao numeric(27, 13);
+DECLARE @query_L3 as nvarchar(MAX) = 'INSERT INTO #plus_table_temp select cod_plu, c' + TRIM(STR(@count_camada)) + ' , ranking_oferta, ranking_vda from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois where  ordem_cluster = ' + TRIM(STR(@count_corte_maximo)) + ' order by ranking_vda ' ;
+
+PRINT '==============================================================='
+PRINT 'LOOP 3'
+PRINT @query_L3
+exec(@query_L3)
+
+print @count_corte_maximo
+if @count_corte_maximo in (3,4,5,6,7,8)
+begin
+DECLARE PLUs_Cursor cursor for Select cod_plu, val_camada from #plus_table_temp order by ranking_oferta desc
+end
+else
+begin
+DECLARE PLUs_Cursor cursor for Select cod_plu, val_camada from #plus_table_temp order by ranking_vda
+end
+
+
+
+    OPEN PLUs_Cursor  
+    FETCH NEXT FROM PLUs_Cursor INTO @cod_plu_temp, @val_camada_temp
+  
+    IF @@FETCH_STATUS <> 0   
+        PRINT 'err'       
+  
+    WHILE @@FETCH_STATUS = 0  
+	BEGIN  
+		PRINT 'WHILE 3'
+		PRINT @val_camada_temp
+		PRINT @target_corte
+		PRINT 'SOMA PLTS'
+
+		select @soma_plts_temp_mf = sum(qtd_plts) from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois where qtd_plts > 0 
+		PRINT @soma_plts_temp_mf
+		DECLARE @query_update_L3 varchar(5000);
+		IF @val_camada_temp <= @target_corte
+		BEGIN
+			print 'if'
+			PRINT STR(cast(@cod_plu_temp as float))
+			print 'val_camada_temp: ' + TRIM(STR(@val_camada_temp))
+			print 'cod_plu: ' + TRIM(STR(@cod_plu_temp))
+			print 'count_camada: ' + TRIM(STR(@count_camada))
+
+			set @query_update_L3 = 'update ievo_gpa_prod.dbo.Tabela_Relacionada_Depois ' +
+			'set qtd_plts = qtd_plts - ' + cast(@val_camada_temp as varchar) + ', is_cortado_nivel_plu = 1 , c' +  TRIM(STR(@count_camada)) + ' = 0 ' +
+			' where cod_plu = ' + TRIM(STR(@cod_plu_temp)) +' ; ' ;
+			EXEC(@query_update_L3);
+			
+			select top 1 @val_plts_depois_reducao = qtd_plts from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois where cod_plu = TRIM(STR(@cod_plu_temp)) ;
+			if(@val_plts_depois_reducao < 0)
+			begin
+				set @val_camada_temp = @val_camada_temp + @val_plts_depois_reducao;
+				update ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+				set qtd_plts = 0
+				where cod_plu = TRIM(STR(@cod_plu_temp)) ;
+			end
+
+			SET @target_corte = @target_corte - @val_camada_temp;
+			
+			FETCH NEXT FROM PLUs_Cursor INTO @cod_plu_temp, @val_camada_temp
+		END
+		ELSE
+		BEGIN
+		print 'else'
+		PRINT STR(cast(@cod_plu_temp as float))	
+			-- CORTAR O PROPORCIONAL FAZER
+			print 'ultimo target: ' + cast(@target_corte as varchar)
+			set @query_update_L3 = 'update ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+			set qtd_plts = qtd_plts - ' + cast(@target_corte as varchar) + ', is_cortado_nivel_plu = 1 , c' +  TRIM(STR(@count_camada)) + ' = c' +  TRIM(STR(@count_camada)) + ' - ' + cast(@target_corte as varchar) +
+			' where cod_plu = ' + TRIM(STR(@cod_plu_temp)) + ';'
+			EXEC(@query_update_L3);
+
+			
+			select top 1 @val_plts_depois_reducao = qtd_plts from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois where cod_plu = TRIM(STR(@cod_plu_temp)) ;
+			if(@val_plts_depois_reducao < 0)
+			begin
+				update ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+				set qtd_plts = 0
+				where cod_plu = TRIM(STR(@cod_plu_temp)) ;
+
+				SET @target_corte = @target_corte - (@target_corte + @val_plts_depois_reducao);
+				FETCH NEXT FROM PLUs_Cursor INTO @cod_plu_temp, @val_camada_temp
+			end
+			else
+			begin
+				BREAK;
+			end
+
+
+			
+		END
+    END  
+  
+    CLOSE PLUs_Cursor  
+    DEALLOCATE PLUs_Cursor  
+
+END -- FIM DO PRIMEIRO IF QUE VALIDA SE PRECISA TER CORTE
+
+insert into ievo_gpa_prod.dbo.InformacaoExtraCorte (dt_processamento, ajuste_reserva, ajuste_camada)
+select TOP 1 getdate(), c_corte , 'c' + TRIM(STR(@count_camada)) from ievo_gpa_prod.dbo.Tabela_Relacionada where ordem_cluster = @count_corte_maximo
+
+
+
+select loja as LOJA, cod_plu as PLU ,cast( ROUND(qtd_plts / plts_cx,0 ) as int )as QDE_EMBAL  from ievo_gpa_prod.dbo.Tabela_Relacionada_Depois
+where cast( ROUND(qtd_plts / plts_cx,0 ) as int ) > 0
+
+
+end
