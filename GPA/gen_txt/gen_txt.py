@@ -29,4 +29,4 @@ if __name__ == "__main__":
     #     print(from_sql[line])
     
     # file_name = prefixo_saida + prev_day() + extensao_saida
-    #upload(file_name)
+    # upload(file_name)
