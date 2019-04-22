@@ -19,8 +19,9 @@ if __name__ == "__main__":
     from_sql  = get_from_mssql()
     from_file = get_from_file()
     
-    print(from_sql.columns)
-    print(from_file.columns)
+    print(from_sql.dtypes)
+    print('')
+    print(from_file.dtypes)
     
     # comparar datasets
     

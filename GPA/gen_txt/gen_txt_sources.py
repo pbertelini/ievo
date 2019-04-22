@@ -56,7 +56,7 @@ def get_from_file():
         txt_out.write(line[2:136] + '\n')
     txt_out.close()
 
-    df = pd.read_csv(txt_file, header=None, sep=';', dtype=str, names=[
+    df = pd.read_csv(txt_file, header=None, sep=';', names=[
         'COD-DEP','COD-LOJA','COD-BAND','COD-FABRIC','COD-PROD',
         'COD-PLU','NOME-PROD','QTD-SUGESTAO','UNI-EMBAL','OP','DATA-PED','USU-PED',
         'PROG-PED','TIP-FATUR','QTD-EMBAL','ISN'])
