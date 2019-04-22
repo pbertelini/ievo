@@ -1,18 +1,10 @@
-# -*- coding: utf-8 -*-
+import pandas as pd
 
-# import gzip
-# 
-# with gzip.open('interf_lojas_m20190421.txt.gz', 'rb') as f:
-#     file_content = f.read()
-    
+file_name = 'sug_ievo_m20190421_sample.txt'
 
-# import gzip
-# import shutil
-# with gzip.open('interf_lojas_m20190421.txt.gz', 'rb') as f_in:
-#      with open('interf_lojas_m20190421.txt', 'wb') as f_out:
-#         shutil.copyfileobj(f_in, f_out)
+df = pd.read_csv(file_name, sep=';', header=None)
+df.drop(df.head(1).index, inplace=True)
 
-# 
-# from sh import gunzip
-# 
-# gunzip('interf_lojas_m20190421.txt.gz')
+print(df.columns)
+print(df.head(3))
+

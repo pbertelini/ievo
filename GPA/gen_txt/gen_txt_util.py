@@ -19,3 +19,4 @@ def unzip(file_path):
     with gzip.open(file_path, 'rb') as f_in:
         with open(file_path.replace('.gz',''), 'wb') as f_out:
             shutil.copyfileobj(f_in, f_out)
+
