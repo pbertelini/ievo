@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from flow.ana_class_atest_rules import rule1
+import sys
+sys.path.append('libs')
+sys.path.append('flow')
+
+from ana_class_atest_rules import rule1
 
 if __name__ == "__main__":
 
