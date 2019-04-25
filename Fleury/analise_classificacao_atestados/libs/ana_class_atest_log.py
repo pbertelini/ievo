@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 import configparser
 config = configparser.RawConfigParser(allow_no_value=True)
-config.read('../conf/ana_class_atest.cfg')
+config.read('./conf/ana_class_atest.cfg')
 
 formatter = logging.Formatter(config.get("log", "format"))
 filename = config.get("log", "log_path") + config.get("log", "log_file")
