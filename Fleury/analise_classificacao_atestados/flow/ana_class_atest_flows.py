@@ -17,10 +17,14 @@ def fluxo1():
     log_ini()
     
     email_test = config.getboolean('email','test')
-    email_dest = config.get('email','dest').split(',')
+    email_subj = config.get('email','subj')
+    email_copy = config.get('email','copy')
     
-    template_html = config.get('email','body')
-    
+    templ_html = config.get('email','body')
+    email_body = open(templ_html, 'r')
+    html = email_body.readlines()
+    html = ''.join(html)
+
     situacao_emp = config.get('parms_fluxo1','situacao_emp').split(',')
     cids_node_01 = config.get('parms_fluxo1','cids_node_01').split(',')
     cids_node_03 = config.get('parms_fluxo1','cids_node_03').split(',')
@@ -32,8 +36,15 @@ def fluxo1():
     node_03_max_dias = config.getint('parms_fluxo1','node_03_max_dias')
     
     email_list = []
-
     atestados_empregados = atestados_empregados_merged()
+
+    email_ok_node_01 = 0
+    email_er_node_01 = 0
+    email_ok_node_02 = 0
+    email_er_node_02 = 0
+    email_ok_node_03 = 0
+    email_er_node_03 = 0
+    
     for i in atestados_empregados.index:
         row = atestados_empregados.loc[i]
         
@@ -45,40 +56,68 @@ def fluxo1():
 #=== NODE 01 ==========================================================================#
             
             if row['CID'][:1] in cids_node_01:
-                if row['Emasil'] is not np.nan and row['Emasil'] not in email_list:
-                    email_list.append(row['Emasil'].lower())
+                if row['Emasil'] is not np.nan: 
+                    if row['Emasil'] not in email_list:
+                        email_list.append(row['Emasil'].lower())
+                        email_ok_node_01 += 1
+                        log.logger.info('NODE # 01: CPF ' + row['CPF'] + '| Email ' + str(row['Emasil']).lower() + ' adicionado a lista!')
+                else:
+                    log.logger.warning('NODE # 01: CPF ' + row['CPF'] + ' ==> Email nao encontrado.')
+                    email_er_node_01 += 1
             else:
-            
+
 #=== NODE 02 ==========================================================================#
                 
                 if ((int(row['QtdeDias']) >= node_02_min_dias) and 
                     (int(row['QtdeDias']) <= node_02_max_dias)):
-                    if row['Emasil'] is not np.nan and row['Emasil'] not in email_list:
-                        email_list.append(row['Emasil'].lower())    
+                    if row['Emasil'] is not np.nan: 
+                        if row['Emasil'] not in email_list:
+                            email_list.append(row['Emasil'].lower())
+                            log.logger.info('NODE # 02: CPF ' + row['CPF'] + '| Email ' + str(row['Emasil']).lower() + ' adicionado a lista!')
+                            email_ok_node_02 += 1
+                    else:
+                        log.logger.warning('NODE # 02: CPF ' + row['CPF'] + ' ==> Email nao encontrado.') 
+                        email_er_node_02 += 1
                 else:
-                    
+
 #=== NODE 03 ==========================================================================#
                     
                     if ((int(row['QtdeDias']) >= node_03_min_dias) and 
                         (int(row['QtdeDias']) <= node_03_max_dias) and
                         (row['CID'][:1] in cids_node_03)):
-                        if row['Emasil'] is not np.nan and row['Emasil'] not in email_list:
-                            email_list.append(row['Emasil'].lower())  
+                        if row['Emasil'] is not np.nan: 
+                            if row['Emasil'] not in email_list:
+                                email_list.append(row['Emasil'].lower())
+                                log.logger.info('NODE # 03: CPF ' + row['CPF'] + '| Email ' + row['Emasil'] + ' adicionado a lista!')
+                                email_ok_node_03 += 1
+                        else:
+                            log.logger.warning('NODE # 03: CPF ' + row['CPF'] + ' ==> Email nao encontrado.')
+                            email_er_node_03 += 1
                     else:
-                        pass # email com resumo p monit
+                        log.logger.debug('CPF nao caiu em nenhum Node: ' + row['CPF'])
 
+    
+    email_list.append(email_copy)
+    log.logger.info('Email ' + email_copy + ' adicionado a lista de destinatarios.')
+    
     email_list = set(email_list)
-    
-    email_body = open(template_html, 'r')
-    html = email_body.readlines()
-    html = ''.join(html)
-    
+
     if email_test:
+        email_dest = config.get('email','dest').split(',')
         email_list = email_dest
-    
-    email('oi como q ta', html)
-    
-    print(len(email_list))
-    print(email_list)
+        log.logger.info('Executando disparo de emails em <MODO TESTE>')
+        log.logger.info('<MODO TESTE> A lista verdadeira de destinatarios sera desprezada.')
+        log.logger.info('<MODO TESTE> Os emails de teste serao entregues apenas para:')
+        log.logger.info( ','.join(email_dest))
+
+    email(email_subj, html, email_list)
+
+    log.logger.info('Resumo do Fluxo de Execucao:')
+    log.logger.info('* Node #01: CPFs que cairam na regra e possuem Email para contato:   ' +str(email_ok_node_01).zfill(5))
+    log.logger.info('* Node #01: CPFs que cairam na regra e nao possuem Email cadastrado: ' +str(email_er_node_01).zfill(5))
+    log.logger.info('* Node #02: CPFs que cairam na regra e possuem Email para contato:   ' +str(email_ok_node_02).zfill(5))
+    log.logger.info('* Node #02: CPFs que cairam na regra e nao possuem Email cadastrado: ' +str(email_er_node_02).zfill(5))
+    log.logger.info('* Node #03: CPFs que cairam na regra e possuem Email para contato:   ' +str(email_ok_node_03).zfill(5))
+    log.logger.info('* Node #03: CPFs que cairam na regra e nao possuem Email cadastrado: ' +str(email_er_node_03).zfill(5))
 
     log_fim()

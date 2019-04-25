@@ -42,7 +42,7 @@ def day_of_the_week(date=dt.now(), string=False):
 
 
 def days_ago(data_str):
-    # 2018-07-27 00:00:00
+    
     d = dt.strptime(data_str, "%Y-%m-%d %H:%M:%S")
     h = now()
     r = (h - d).days
@@ -50,14 +50,13 @@ def days_ago(data_str):
 
 def log_ini():
     
-    log.logger.info("=" * 65)
+    log.logger.info("=" * 90)
     log.logger.info("ANALISE E CLASSIFICACAO DE ATESTADOS <FLEURY Powered by iEVO> INI")
-    log.logger.info("=" * 65) 
+    log.logger.info("=" * 90) 
     
 
 def log_fim():
     
-    log.logger.info("=" * 65)
+    log.logger.info("=" * 90)
     log.logger.info("ANALISE E CLASSIFICACAO DE ATESTADOS <FLEURY Powered by iEVO> FIM")
-    log.logger.info("=" * 65) 
-    
+    log.logger.info("=" * 90) 
