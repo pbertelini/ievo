@@ -12,7 +12,7 @@ import configparser
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read('./conf/ana_class_atest.cfg')
 
-def email(subj, text, dest):
+def email(subj, text, dest, anexo=None):
 
     try:
         e_from = config.get('email','from')
@@ -46,6 +46,14 @@ def email(subj, text, dest):
             encoders.encode_base64(mime)
             msg.attach(mime)
         
+        if anexo is not None:
+            nome = anexo.split('/')
+            fp = open(anexo)
+            attachment = MIMEText(fp.read())
+            fp.close()
+            attachment.add_header("Content-Disposition", "attachment", filename=nome[2])
+            msg.attach(attachment)
+
         msg.attach(MIMEText(text, 'html'))    
         server = smtplib.SMTP(e_smtp)
         server.starttls()
