@@ -10,6 +10,9 @@ config.read('./conf/ana_class_atest.cfg')
 
 def fluxo1():
 
+    print('')
+    print('Processando...')
+
     from libs.ana_class_atest_source import atestados_empregados_merged
     from libs.ana_class_atest_util import log_ini, log_fim, days_ago, today
     from libs.ana_class_atest_notification import email
@@ -167,7 +170,7 @@ def fluxo1():
     email(email_subj, html, email_list)
 
     try:
-        df.to_csv(nome_resumo_analitico, index=False)
+        df.to_csv(nome_resumo_analitico, index=False) # , sep=';')
         if email_test:
             email(subj_monitoracao, html2, email_dest, nome_resumo_analitico)
         else:
