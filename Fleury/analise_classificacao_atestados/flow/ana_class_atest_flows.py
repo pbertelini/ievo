@@ -110,7 +110,51 @@ def fluxo1():
         log.logger.info('<MODO TESTE> Os emails de teste serao entregues apenas para:')
         log.logger.info( ','.join(email_dest))
 
-    email(email_subj, html, email_list)
+    # email(email_subj, html, email_list)
+
+#=== PRINTS ==========================================================================#
+
+    usuarios_notificados = email_ok_node_01 + email_ok_node_02 + email_ok_node_03  
+
+    usuarios_a_notificar = (email_ok_node_01 + email_ok_node_02 + email_ok_node_03 +
+                            email_er_node_01 + email_er_node_02 + email_er_node_03)
+
+    print('')
+    print('Rotina executada com sucesso!')
+    print('')
+    print('Inicio da Rotina: Integração de TABELAS')
+    print('-' * 112)
+    print('[INFO] Tabela de Atestados carregada com sucesso.')
+    print('[INFO] Tabela de Empregados carregada com sucesso.')
+    print('[INFO] Matriz Empregados + Atestados realizado com sucesso.')
+    print('')
+    print('-' * 112)
+    print('[ALGORTIMO] ARVORE DECISÕES:')
+    print('[RESULTADO GERAL] # Funcionários a serem notificados: ' +str(usuarios_a_notificar).zfill(3))
+    print('[CITAÇÕES] # Mails enviados: ' +str(usuarios_notificados).zfill(3))
+    print('[RESUMO ANALITICO] Arquivo: iEVO_atestados_20190425.csv')
+    print('')
+    print('-' * 112)
+    print('[NODO #1] Atestados com CID [C; D; F; M; S; T]')
+    print('[Resultado] # Funcionários enquadrados neste critério: ' +str(email_ok_node_01).zfill(3))
+    print('[Citações] # Mails enviados com sucesso: ' +str(email_ok_node_01).zfill(3))
+    print('[Citações] # Mails não enviados por falta de cadastrado: ' +str(email_er_node_01).zfill(3))
+    print('')
+    print('-' * 112)
+    print('[NODO #2] Atestados com afastamento entre 10 e 15 dias')
+    print('[Resultado] # Funcionários enquadrados neste critério: ' +str(email_ok_node_02).zfill(3))
+    print('[Citações] # Mails enviados com sucesso: ' +str(email_ok_node_02).zfill(3))
+    print('[Citações] # Mails não enviados por falta de cadastrado:' +str(email_er_node_02).zfill(3))
+    print('')
+    print('-' * 112)
+    print('[NODO #3] Atestados com afastamento entre 5 e 9 dias e CID [E;I;O]')
+    print('[Resultado] # Funcionários enquadrados neste critério: ' +str(email_ok_node_03).zfill(3))
+    print('[Citações] # Mails enviados com sucesso: ' +str(email_ok_node_03).zfill(3))
+    print('[Citações] # Mails não enviados por falta de cadastrado: ' +str(email_er_node_03).zfill(3))
+    print('')
+    print('-' * 112)
+
+#=====================================================================================#
 
     log.logger.info('Resumo do Fluxo de Execucao:')
     log.logger.info('* Node #01: CPFs que cairam na regra e possuem Email para contato:   ' +str(email_ok_node_01).zfill(5))
