@@ -1,0 +1,85 @@
+2019-04-25 01:14:09,241 [INFO] ==========================================================================================
+2019-04-25 01:14:09,241 [INFO] ANALISE E CLASSIFICACAO DE ATESTADOS <FLEURY Powered by iEVO> INI
+2019-04-25 01:14:09,241 [INFO] ==========================================================================================
+2019-04-25 01:14:09,340 [INFO] Tabela de Atestados carregada com sucesso.
+2019-04-25 01:14:09,512 [INFO] Tabela de Empregados carregada com sucesso.
+2019-04-25 01:14:09,512 [INFO] Merge de tabelas Empregados + Atestados realizado com sucesso.
+2019-04-25 01:14:09,608 [WARNING] NODE # 01: CPF 15377329783 ==> Email nao encontrado.
+2019-04-25 01:14:09,666 [INFO] NODE # 01: CPF 02220926702| Email joziane.teixeira@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:09,855 [WARNING] NODE # 01: CPF 13477567790 ==> Email nao encontrado.
+2019-04-25 01:14:09,978 [WARNING] NODE # 01: CPF 93006330153 ==> Email nao encontrado.
+2019-04-25 01:14:10,177 [WARNING] NODE # 01: CPF 85235210034 ==> Email nao encontrado.
+2019-04-25 01:14:10,201 [INFO] NODE # 01: CPF 01826251766| Email charliane.santos@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:10,429 [INFO] NODE # 01: CPF 14704178803| Email denivalda.silva@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:10,483 [WARNING] NODE # 01: CPF 42164723899 ==> Email nao encontrado.
+2019-04-25 01:14:10,562 [WARNING] NODE # 01: CPF 36229315823 ==> Email nao encontrado.
+2019-04-25 01:14:10,575 [INFO] NODE # 01: CPF 21564380807| Email katiam.silva@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:10,605 [INFO] NODE # 01: CPF 05162667137| Email stephanie.franca@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:10,676 [INFO] NODE # 01: CPF 42434597890| Email raphaela.jesus@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:10,710 [INFO] NODE # 01: CPF 16824760811| Email mileide.trigo@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:10,764 [WARNING] NODE # 01: CPF 08269816663 ==> Email nao encontrado.
+2019-04-25 01:14:10,869 [INFO] NODE # 01: CPF 43207547869| Email stefany.santos@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:10,912 [WARNING] NODE # 01: CPF 40599234865 ==> Email nao encontrado.
+2019-04-25 01:14:10,985 [INFO] NODE # 01: CPF 44129985841| Email weslaine.barros@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,087 [INFO] NODE # 01: CPF 03346423883| Email gilza.ansanelli@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,101 [WARNING] NODE # 01: CPF 31878409816 ==> Email nao encontrado.
+2019-04-25 01:14:11,124 [INFO] NODE # 01: CPF 21800420862| Email roberta.sanchez@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,144 [WARNING] NODE # 01: CPF 05500004379 ==> Email nao encontrado.
+2019-04-25 01:14:11,144 [WARNING] NODE # 01: CPF 05500004379 ==> Email nao encontrado.
+2019-04-25 01:14:11,169 [INFO] NODE # 01: CPF 19276391827| Email anderson.guerra@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,226 [INFO] NODE # 01: CPF 32797730836| Email fernanda.pmoreira@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,272 [INFO] NODE # 03: CPF 37528226866| Email PALOMA.CARVALHO@GRUPOFLEURY.COM.BR adicionado a lista!
+2019-04-25 01:14:11,368 [INFO] NODE # 01: CPF 13212134844| Email cintia.furuzawa@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,477 [WARNING] NODE # 03: CPF 32803754878 ==> Email nao encontrado.
+2019-04-25 01:14:11,670 [WARNING] NODE # 03: CPF 16338556864 ==> Email nao encontrado.
+2019-04-25 01:14:11,757 [INFO] NODE # 02: CPF 11489202854| Email katia.loliveira@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,801 [INFO] NODE # 01: CPF 19286816898| Email claudia.santana@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:11,858 [WARNING] NODE # 01: CPF 23438567881 ==> Email nao encontrado.
+2019-04-25 01:14:11,972 [WARNING] NODE # 01: CPF 34126037837 ==> Email nao encontrado.
+2019-04-25 01:14:12,077 [WARNING] NODE # 01: CPF 38518081858 ==> Email nao encontrado.
+2019-04-25 01:14:12,467 [WARNING] NODE # 01: CPF 47461789848 ==> Email nao encontrado.
+2019-04-25 01:14:12,468 [WARNING] NODE # 02: CPF 47461789848 ==> Email nao encontrado.
+2019-04-25 01:14:12,503 [WARNING] NODE # 01: CPF 48182657806 ==> Email nao encontrado.
+2019-04-25 01:14:12,589 [INFO] NODE # 01: CPF 38816615818| Email stephanie.santos@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,592 [INFO] NODE # 01: CPF 41401864880| Email wergson.silva@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,651 [INFO] NODE # 01: CPF 43798388890| Email crislayne.oliveira@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,665 [INFO] NODE # 01: CPF 27595237807| Email maria.simoes@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,694 [INFO] NODE # 01: CPF 31660902827| Email kelly.lamatta@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,729 [INFO] NODE # 01: CPF 14502031836| Email marli.bahia@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,735 [INFO] NODE # 01: CPF 28267918850| Email fernanda.vgalvao@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,896 [INFO] NODE # 01: CPF 30549740813| Email fernanda.martini@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,915 [INFO] NODE # 01: CPF 37216769805| Email andreia.ssoares@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,983 [INFO] NODE # 01: CPF 11433673835| Email jairo.silva@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:12,983 [INFO] NODE # 01: CPF 11433673835| Email jairo.silva@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,010 [INFO] NODE # 01: CPF 31469848813| Email karinas.cunha@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,073 [INFO] NODE # 01: CPF 14367470822| Email neide.mateus@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,144 [INFO] NODE # 01: CPF 40262378850| Email leticia.aoliveira@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,283 [WARNING] NODE # 01: CPF 28107190807 ==> Email nao encontrado.
+2019-04-25 01:14:13,283 [WARNING] NODE # 01: CPF 28107190807 ==> Email nao encontrado.
+2019-04-25 01:14:13,298 [INFO] NODE # 01: CPF 31027617808| Email maria.salomao@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,352 [INFO] NODE # 01: CPF 36365322860| Email flavia.lapa@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,411 [INFO] NODE # 01: CPF 46303126847| Email vitor.creis@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,668 [INFO] NODE # 01: CPF 25055746858| Email luciene.santana@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:13,792 [WARNING] NODE # 01: CPF 01648735460 ==> Email nao encontrado.
+2019-04-25 01:14:13,805 [WARNING] NODE # 01: CPF 10451843495 ==> Email nao encontrado.
+2019-04-25 01:14:13,972 [WARNING] NODE # 01: CPF 39272318866 ==> Email nao encontrado.
+2019-04-25 01:14:14,055 [INFO] NODE # 01: CPF 32908209802| Email silvana.moura@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:14,383 [INFO] NODE # 01: CPF 03561049745| Email cesar.silva@grupofleury.com.br adicionado a lista!
+2019-04-25 01:14:14,451 [WARNING] NODE # 01: CPF 07536746709 ==> Email nao encontrado.
+2019-04-25 01:14:14,493 [WARNING] NODE # 01: CPF 12231675773 ==> Email nao encontrado.
+2019-04-25 01:14:14,683 [INFO] Email nac@grupofleury.com.br adicionado a lista de destinatarios.
+2019-04-25 01:14:14,683 [INFO] Executando disparo de emails em <MODO TESTE>
+2019-04-25 01:14:14,683 [INFO] <MODO TESTE> A lista verdadeira de destinatarios sera desprezada.
+2019-04-25 01:14:14,683 [INFO] <MODO TESTE> Os emails de teste serao entregues apenas para:
+2019-04-25 01:14:14,683 [INFO] diego.belchior@gmail.com,nicolas.banfi@gmail.com
+2019-04-25 01:14:19,665 [INFO] Email(s) enviado(s) com sucesso!
+2019-04-25 01:14:19,665 [INFO] Resumo do Fluxo de Execucao:
+2019-04-25 01:14:19,665 [INFO] * Node #01: CPFs que cairam na regra e possuem Email para contato:   00035
+2019-04-25 01:14:19,665 [INFO] * Node #01: CPFs que cairam na regra e nao possuem Email cadastrado: 00023
+2019-04-25 01:14:19,666 [INFO] * Node #02: CPFs que cairam na regra e possuem Email para contato:   00001
+2019-04-25 01:14:19,666 [INFO] * Node #02: CPFs que cairam na regra e nao possuem Email cadastrado: 00001
+2019-04-25 01:14:19,666 [INFO] * Node #03: CPFs que cairam na regra e possuem Email para contato:   00001
+2019-04-25 01:14:19,666 [INFO] * Node #03: CPFs que cairam na regra e nao possuem Email cadastrado: 00002
+2019-04-25 01:14:19,666 [INFO] ==========================================================================================
+2019-04-25 01:14:19,666 [INFO] ANALISE E CLASSIFICACAO DE ATESTADOS <FLEURY Powered by iEVO> FIM
+2019-04-25 01:14:19,666 [INFO] ==========================================================================================
