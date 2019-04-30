@@ -36,7 +36,7 @@ def get_from_mssql():
                 cast( ROUND(qtd_plts / plts_cx,0 ) as int ) > 0
         """)
             
-        df = pd.read_sql(stmt,conn)
+        df = pd.read_sql(stmt,conn,dtype=str)
         return df
     
     except Exception as e:

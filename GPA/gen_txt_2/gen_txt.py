@@ -37,34 +37,11 @@ if __name__ == "__main__":
     diff_file = []
 
     log.logger.info('Diferencas:')
-    
-    for sql_index, sql_row in from_sql.iterrows():        
-        for file_index, file_row in from_file.iterrows():
 
-            if ((int(sql_row['LOJA'])      == int(file_row['COD-LOJA'])) and
-                (int(sql_row['PLU'])       == int(file_row['COD-PLU']))  and
-                (int(sql_row['QDE_EMBAL']) != int(file_row['QTD-EMBAL']))):
-                
-                d = '1'                                     + ';' + \
-                    str(file_row['COD-DEP'])                + ';' + \
-                    str(file_row['COD-LOJA'])               + ';' + \
-                    str(file_row['COD-BAND'])               + ';' + \
-                    str(file_row['COD-FABRIC'])             + ';' + \
-                    str(file_row['COD-PROD'])               + ';' + \
-                    str(file_row['COD-PLU'])                + ';' + \
-                    str(file_row['NOME-PROD'])              + ';' + \
-                    str(file_row['QTD-SUGESTAO'])           + ';' + \
-                    str(file_row['UNI-EMBAL'])              + ';' + \
-                    str(file_row['OP'])                     + ';' + \
-                    str(file_row['DATA-PED'])               + ';' + \
-                    str(file_row['USU-PED'])                + ';' + \
-                    str(file_row['PROG-PED'])               + ';' + \
-                    str(file_row['TIP-FATUR'])              + ';' + \
-                    str(int(sql_row['QDE_EMBAL'])).zfill(6) + ';' + \
-                    str(file_row['ISN'])                    + ';' + \
-                    '            1'
-                diff_file.append(d)
-                log.logger.info(d)
+    mer = pd.merge(from_file, from_sql, how='left', left_on=['COD-LOJA','COD-PLU'], right_on=['LOJA','PLU'])
+
+    print(mer)
+    log.logger.info(mer)
 
     log.logger.info('Verificacao concluida.')
 
@@ -74,7 +51,7 @@ if __name__ == "__main__":
         for line in diff_file:
             f_out.write(line + '\n')
         f_out.close()
-        upload(file_name)
+        # upload(file_name)
     else:
         log.logger.info("Arquivo vazio... Upload cancelado.")
    
