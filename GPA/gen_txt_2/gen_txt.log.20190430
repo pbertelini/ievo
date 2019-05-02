@@ -1,0 +1,116 @@
+2019-04-30 18:54:42,524 (INFO) ==================================================
+2019-04-30 18:54:42,524 (INFO)      GENERATE TXT FROM SQL [IEVO] - INI
+2019-04-30 18:54:42,524 (INFO) ==================================================
+2019-04-30 18:54:42,524 (INFO) Obtendo dados do MSSQL...
+2019-04-30 18:54:43,672 (INFO) Obtendo dados do arquivo de Entrada...
+2019-04-30 18:54:43,672 (INFO) Iniciando <DOWNLOAD> sFTP...
+2019-04-30 18:54:43,672 (INFO) Arquivo Local: interf_lojas_m20190429.txt.gz
+2019-04-30 18:54:43,673 (INFO) Arquivo Remoto: /home/sv3move/tmp/Arquivos/interf_lojas_m20190429.txt.gz
+2019-04-30 18:54:46,870 (INFO) Download realizado com sucesso!
+2019-04-30 18:54:46,908 (INFO) Arquivo descompactado: interf_lojas_m20190429.txt.gz
+2019-04-30 18:54:46,982 (INFO) Diferencas:
+2019-04-30 18:54:46,982 (INFO) Verificacao concluida.
+2019-04-30 18:54:46,982 (INFO) Arquivo vazio... Upload cancelado.
+2019-04-30 18:54:46,982 (INFO) ==================================================
+2019-04-30 18:54:46,982 (INFO)      GENERATE TXT FROM SQL [IEVO] - FIM
+2019-04-30 18:54:46,982 (INFO) ==================================================
+2019-04-30 19:02:02,041 (INFO) ==================================================
+2019-04-30 19:02:02,042 (INFO)      GENERATE TXT FROM SQL [IEVO] - INI
+2019-04-30 19:02:02,042 (INFO) ==================================================
+2019-04-30 19:02:02,042 (INFO) Obtendo dados do MSSQL...
+2019-04-30 19:02:03,163 (INFO) Obtendo dados do arquivo de Entrada...
+2019-04-30 19:02:03,163 (INFO) Iniciando <DOWNLOAD> sFTP...
+2019-04-30 19:02:03,163 (INFO) Arquivo Local: interf_lojas_m20190429.txt.gz
+2019-04-30 19:02:03,163 (INFO) Arquivo Remoto: /home/sv3move/tmp/Arquivos/interf_lojas_m20190429.txt.gz
+2019-04-30 19:02:06,437 (INFO) Download realizado com sucesso!
+2019-04-30 19:02:06,448 (INFO) Arquivo descompactado: interf_lojas_m20190429.txt.gz
+2019-04-30 19:02:06,513 (INFO) Diferencas:
+2019-04-30 19:02:49,796 (INFO) ==================================================
+2019-04-30 19:02:49,796 (INFO)      GENERATE TXT FROM SQL [IEVO] - INI
+2019-04-30 19:02:49,797 (INFO) ==================================================
+2019-04-30 19:02:49,797 (INFO) Obtendo dados do MSSQL...
+2019-04-30 19:02:50,888 (INFO) Obtendo dados do arquivo de Entrada...
+2019-04-30 19:02:50,888 (INFO) Iniciando <DOWNLOAD> sFTP...
+2019-04-30 19:02:50,888 (INFO) Arquivo Local: interf_lojas_m20190429.txt.gz
+2019-04-30 19:02:50,888 (INFO) Arquivo Remoto: /home/sv3move/tmp/Arquivos/interf_lojas_m20190429.txt.gz
+2019-04-30 19:02:54,133 (INFO) Download realizado com sucesso!
+2019-04-30 19:02:54,172 (INFO) Arquivo descompactado: interf_lojas_m20190429.txt.gz
+2019-04-30 19:02:54,277 (INFO) Diferencas:
+2019-04-30 19:02:54,341 (INFO)       COD-DEP  COD-LOJA COD-BAND  ...    LOJA        PLU  QDE_EMBAL
+0        1942      1299       PA  ...     NaN        NaN        NaN
+1         930      1299       PA  ...     NaN        NaN        NaN
+2        1965      1299       PA  ...     NaN        NaN        NaN
+3        1965      1299       PA  ...     NaN        NaN        NaN
+4        1965      1299       PA  ...  1299.0  1028238.0        7.0
+5        1965      1299       PA  ...     NaN        NaN        NaN
+6        1965      1299       PA  ...     NaN        NaN        NaN
+7        1965      1299       PA  ...     NaN        NaN        NaN
+8        1965      1299       PA  ...     NaN        NaN        NaN
+9        1965      1299       PA  ...  1299.0  1025660.0        6.0
+10       1965      1299       PA  ...     NaN        NaN        NaN
+11       1965      1299       PA  ...     NaN        NaN        NaN
+12       1942      1299       PA  ...     NaN        NaN        NaN
+13       1942      1299       PA  ...     NaN        NaN        NaN
+14       1942      1299       PA  ...     NaN        NaN        NaN
+15       1942      1299       PA  ...     NaN        NaN        NaN
+16       1942      1299       PA  ...     NaN        NaN        NaN
+17       1942      1299       PA  ...     NaN        NaN        NaN
+18       1942      1299       PA  ...     NaN        NaN        NaN
+19       1942      1299       PA  ...     NaN        NaN        NaN
+20       1942      1299       PA  ...     NaN        NaN        NaN
+21       1942      1299       PA  ...     NaN        NaN        NaN
+22       1942      1299       PA  ...     NaN        NaN        NaN
+23       1942      1299       PA  ...     NaN        NaN        NaN
+24       1942      1299       PA  ...     NaN        NaN        NaN
+25       1942      1299       PA  ...     NaN        NaN        NaN
+26       1942      1299       PA  ...     NaN        NaN        NaN
+27       1942      1299       PA  ...     NaN        NaN        NaN
+28       1942      1299       PA  ...     NaN        NaN        NaN
+29       1942      1299       PA  ...     NaN        NaN        NaN
+...       ...       ...      ...  ...     ...        ...        ...
+1600      957      1299       PA  ...     NaN        NaN        NaN
+1601     1965      1299       PA  ...  1299.0  1039443.0        1.0
+1602     1965      1299       PA  ...  1299.0  1025044.0        1.0
+1603     1965      1299       PA  ...  1299.0  1118090.0        1.0
+1604     1965      1299       PA  ...  1299.0  4140962.0        1.0
+1605     1965      1299       PA  ...  1299.0  4708940.0        1.0
+1606     1965      1299       PA  ...  1299.0  1061119.0        1.0
+1607     1965      1299       PA  ...  1299.0  1178642.0        1.0
+1608     1965      1299       PA  ...  1299.0  1014045.0        1.0
+1609      957      1299       PA  ...     NaN        NaN        NaN
+1610      957      1299       PA  ...     NaN        NaN        NaN
+1611      957      1299       PA  ...     NaN        NaN        NaN
+1612      957      1299       PA  ...     NaN        NaN        NaN
+1613      957      1299       PA  ...     NaN        NaN        NaN
+1614      957      1299       PA  ...     NaN        NaN        NaN
+1615      957      1299       PA  ...     NaN        NaN        NaN
+1616      957      1299       PA  ...     NaN        NaN        NaN
+1617      957      1299       PA  ...     NaN        NaN        NaN
+1618      957      1299       PA  ...     NaN        NaN        NaN
+1619      957      1299       PA  ...     NaN        NaN        NaN
+1620      957      1299       PA  ...     NaN        NaN        NaN
+1621      957      1299       PA  ...     NaN        NaN        NaN
+1622      957      1299       PA  ...     NaN        NaN        NaN
+1623      957      1299       PA  ...     NaN        NaN        NaN
+1624      982      1299       PA  ...     NaN        NaN        NaN
+1625      957      1299       PA  ...     NaN        NaN        NaN
+1626      957      1299       PA  ...     NaN        NaN        NaN
+1627      957      1299       PA  ...     NaN        NaN        NaN
+1628      957      1299       PA  ...     NaN        NaN        NaN
+1629      957      1299       PA  ...     NaN        NaN        NaN
+
+[1630 rows x 19 columns]
+2019-04-30 19:02:54,388 (INFO) Verificacao concluida.
+2019-04-30 19:02:54,388 (INFO) Arquivo vazio... Upload cancelado.
+2019-04-30 19:02:54,388 (INFO) ==================================================
+2019-04-30 19:02:54,388 (INFO)      GENERATE TXT FROM SQL [IEVO] - FIM
+2019-04-30 19:02:54,388 (INFO) ==================================================
+2019-04-30 19:03:57,349 (INFO) ==================================================
+2019-04-30 19:03:57,349 (INFO)      GENERATE TXT FROM SQL [IEVO] - INI
+2019-04-30 19:03:57,349 (INFO) ==================================================
+2019-04-30 19:03:57,349 (INFO) Obtendo dados do MSSQL...
+2019-04-30 19:03:58,317 (ERROR) Falha ao obter dados do MSSQL: read_sql() got an unexpected keyword argument 'dtype'
+Traceback (most recent call last):
+  File "C:\Users\dshaw\ievo_dev\GPA\gen_txt_2\gen_txt_sources.py", line 39, in get_from_mssql
+    df = pd.read_sql(stmt,conn,dtype=str)
+TypeError: read_sql() got an unexpected keyword argument 'dtype'
