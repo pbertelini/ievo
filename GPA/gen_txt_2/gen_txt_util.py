@@ -14,7 +14,7 @@ def prev_day():
 
     try:
         today = dt.now().date()
-        yesterday = today + td(days=-1)
+        yesterday = today + td(days=-2)
         return str(yesterday).replace('-','')
     except Exception as e:
         log.logger.exception('Falha ao obter dia anterior: ' + str(e))

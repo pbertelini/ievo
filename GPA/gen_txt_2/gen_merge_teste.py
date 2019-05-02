@@ -45,7 +45,7 @@ if __name__ == "__main__":
 #                 (int(sql_row['PLU'])       == int(file_row['COD-PLU']))  and
 #                 (int(sql_row['QDE_EMBAL']) != int(file_row['QTD-EMBAL']))):
                 
-    mer = pd.merge(from_file, from_sql, how='left', left_on=['chapa'], right_on=['CPF'])
+#     mer = pd.merge(from_file, from_sql, how='left', left_on=['chapa'], right_on=['CPF'])
                 
 #                 d = '1'                                     + ';' + \
 #                     str(file_row['COD-DEP'])                + ';' + \

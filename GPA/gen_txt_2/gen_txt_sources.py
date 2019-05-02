@@ -36,7 +36,7 @@ def get_from_mssql():
                 cast( ROUND(qtd_plts / plts_cx,0 ) as int ) > 0
         """)
             
-        df = pd.read_sql(stmt,conn,dtype=str)
+        df = pd.read_sql(stmt,conn)
         return df
     
     except Exception as e:
@@ -70,12 +70,16 @@ def get_from_file():
             txt_out.write(line[2:136] + '\n')
         txt_out.close()
     
-        df = pd.read_csv(txt_file, dtype=str, header=None, sep=';', names=[
+        df = pd.read_csv(txt_file, header=None, sep=';', names=[
             'COD-DEP','COD-LOJA','COD-BAND','COD-FABRIC','COD-PROD','COD-PLU',
             'NOME-PROD','QTD-SUGESTAO','UNI-EMBAL','OP','DATA-PED','USU-PED',
             'PROG-PED','TIP-FATUR','QTD-EMBAL','ISN'])
-        return df
-    
+
+        dfs = df.groupby(['COD-LOJA', 'COD-PLU'], as_index=False)[['QTD-EMBAL']].sum()      
+        dfs.to_csv('teste_com_sumarizacao.csv')
+        
+        return dfs
+
     except Exception as e:
         log.logger.exception('Falha ao obter dados do arquivo de Entrada: ' + str(e))
         sys.exit(0)
